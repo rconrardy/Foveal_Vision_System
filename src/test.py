@@ -1,7 +1,5 @@
 import cv2
 import eye
-import time
-import vision
 
 
 def main():

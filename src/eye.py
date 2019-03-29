@@ -1,6 +1,6 @@
 import cv2
 import threading
-import time
+import vision
 
 
 class Eye:
@@ -10,41 +10,83 @@ class Eye:
         """Initialize a new eye object."""
         self.id = id
         self.stream = cv2.VideoCapture(id)
-        self.signals = {"shutdown": False, "grabbed": False}
+        self.status = {
+            "shutdown": False,
+            "grabbed": False
+        }
+        self.vision = {
+            "foveal": {
+                "ratio": 1/3,
+                "pixals": 64,
+                "curr": None,
+                "prev": None
+            },
+            "parafoveal": {
+                "ratio": 2/3,
+                "pixals": 64,
+                "curr": None,
+                "prev": None
+            },
+            "Peripheral": {
+                "ratio": 3/3,
+                "pixals": 64,
+                "curr": None,
+                "prev": None
+            }
+        }
 
     def capture(self):
         """Start capturing the stream for the current eye."""
-        # Read a frame from the stream
-        self.signals["grabbed"], self.frame = self.stream.read()
-        # Run the program until it is told to shut down
-        while not self.signals["shutdown"]:
-            # Ensure that the frame is grabbed from the stream
-            if not self.signals["grabbed"]:
-                # Stop the capture
-                self.stop()
+        self.status["grabbed"], frame = self.stream.read()
+        frame = crop_square(frame)
+        for type, param in self.vision.items():
+            param["curr"] = vision.setup(
+                frame,
+                param["ratio"],
+                param["pixals"]
+            )
+        while not self.status["shutdown"]:
+            if self.status["grabbed"]:
+                self.update(frame)
             else:
-                # Set the last frame captured equal to the previous frame.
-                prev_frame = self.frame
-                # Read a frame fromt the stream.
-                self.signals["grabbed"], self.frame = self.stream.read()
-                # Show the stream
-                cv2.imshow("Video" + str(self.id), self.frame)
-                # Stop the program when there is a shutoff signal
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    self.stop()
-                    break
+                self.stop()
+
+    def update(self, frame):
+        prev_frame = frame
+        for type, param in self.vision.items():
+            param["prev"] = param["curr"]
+        self.status["grabbed"], frame = self.stream.read()
+        frame = crop_square(frame)
+        for type, param in self.vision.items():
+            param["curr"] = vision.setup(
+                frame,
+                param["ratio"],
+                param["pixals"]
+            )
+            cv2.imshow(type, param["curr"].frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            self.stop()
 
     def start(self):
         """Create a new thread for capturing the stream."""
-        # Make a new thread for capturing the video
         self.t1 = threading.Thread(target=self.capture, args=())
-        # Start the thread.
         self.t1.start()
 
     def stop(self):
         """Ends the thread for eye."""
-        self.signals["shutdown"] = True
+        self.status["shutdown"] = True
 
+
+def crop_square(frame):
+    """Crop the current frame to a square."""
+    width, height = frame.shape[:2]
+    if width > height:
+        move = (width - height) // 2
+        frame = frame[move:(width - move), :]
+    elif width < height:
+        move = (height - width) // 2
+        frame = frame[:, move:(height - move)]
+    return frame
 
 
 def setup(id):
