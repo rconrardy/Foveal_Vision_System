@@ -4,8 +4,11 @@ import eye
 
 def main():
     """For testing the FVS library."""
-    capture = eye.setup(0)
-    capture.start()
+    right = eye.setup(0)
+    left = eye.setup(1)
+    right.start()
+    left.start()
+
 
 
 if __name__ == '__main__':

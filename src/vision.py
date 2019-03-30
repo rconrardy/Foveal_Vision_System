@@ -5,40 +5,77 @@ import math
 class Vision:
     """Provides a type of vision (Original, Peripheral, Parafoveal, Foveal)."""
 
-    def __init__(self, frame, percent, pixels):
-        self.zoom(frame, percent)
-        self.frame = cv2.resize(self.frame, (pixels, pixels))
-        self.gray = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
+    def __init__(self, ratio, size):
+        """Initialize a new vision."""
+        self.params = {"ratio": ratio, "size": (size, size)}
+        self.images = {}
 
-    def zoom(self, frame, percent):
-        """Zoom in on an image."""
-        size = frame.shape[1]
-        print(size)
-        new_size = math.floor(size * percent)
-        move = (size - new_size) // 2
-        self.frame = frame[move:(size - move), move:(size - move)]
+    def update_curr(self, image):
+        self.crop_image(image)
+        self.images["curr"] = cv2.resize(
+            self.images["curr"],
+            self.params["size"]
+        )
+        self.images["gray"] = cv2.cvtColor(
+            self.images["curr"],
+            cv2.COLOR_BGR2GRAY
+        )
 
-    def get_difference(self, prev_frame):
-        """Get the difference between two frames"""
-        self.diff = cv2.absdiff(self.gray, prev_frame)
-        self.thresh = cv2.threshold(self.diff, 30, 255, cv2.THRESH_BINARY)[1]
+    def update_prev(self):
+        self.images["prev"] = self.images["gray"]
+
+    def get_diff(self):
+        self.images["diff"] = cv2.absdiff(
+            self.images["prev"],
+            self.images["gray"]
+        )
+        self.images["diff"] = cv2.threshold(
+            self.images["diff"],
+            30,
+            255,
+            cv2.THRESH_BINARY
+        )[1]
 
     def get_edge(self):
-        """Get the edges in the frame."""
-        self.edge = cv2.Canny(self.frame, 100, 200)
+        self.images["edge"] = cv2.Canny(
+            self.images["curr"],
+            100,
+            200
+        )
 
-    def get_faces(self, face_cascade):
-        """Get the faces in the frame"""
-        pass
+    def crop_image(self, image):
+        size = image.shape[1]
+        crop = math.floor(size * self.params["ratio"])
+        move = (size - crop) // 2
+        self.images["curr"] = image[move:(size - move), move:(size - move)]
+
+    # def captur(self, frame):
+    #     self.crop(frame, self.params["ratio"])
+    #
+    #     self.im = cv2.resize(self.im, (pixels, pixels))
+    #     self.gray = cv2.cvtColor(self.im, cv2.COLOR_BGR2GRAY)
+    #
+    # def crop(self, frame, ratio):
+    #     """Crop around center."""
+    #     size = frame.shape[1]
+    #     new_size = math.floor(size * ratio)
+    #     move = (size - new_size) // 2
+    #     self.im = frame[move:(size - move), move:(size - move)]
+    #
+    # def get_difference(self, prev_frame):
+    #     """Difference between frames"""
+    #     self.diff = cv2.absdiff(self.gray, prev_frame)
+    #     self.thresh = cv2.threshold(self.diff, 30, 255, cv2.THRESH_BINARY)[1]
+    #
+    # def get_edge(self):
+    #     """Edges in frame."""
+    #     self.edge = cv2.Canny(self.im, 100, 200)
+    #
+    # def get_faces(self, face_cascade):
+    #     """Faces in frame"""
+    #     pass
 
 
-def setup(frame, percent, pixels):
-    """Setup a new type of vision."""
-    return Vision(frame, percent, pixels)
-
-
-# def foveal(frame):
-#     """Preset size for foveal vision."""
-#     width, height = frame.shape[:2]
-#     print(width, height)
-#     return Vision(frame, 64)
+def setup(ratio, pixels):
+    """Setup a new vision."""
+    return Vision(ratio, pixels)
