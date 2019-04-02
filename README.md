@@ -44,10 +44,10 @@
 ### Vision
 ### Camera & Mount
 * Looking for a programmable pan and tilt camera mount that is cheap and reliable.
-  | Cameras & Mounts                                                                                                                | Price  |
-  | ------------------------------------------------------------------------------------------------------------------------------- | ------:|
-  | [Lynxmotion Pan and Tilt Kit / Aluminium](https://www.robotshop.com/en/lynxmotion-pan-and-tilt-kit-aluminium2.html)             | $29.93 |
-  | [DF05BB Tilt / Pan Kit](https://www.robotshop.com/en/df05bb-tilt-pan-kit.html)                                                  | $29.05 |
-  | [JSumo Robopan Micro Pan / Tilt](https://www.robotshop.com/en/jsumo-robopan-micro-pan-tilt.html)                                | $17.50 |
-  | [Pan / Tilt bracket Kit (Single Attachment)](https://www.robotshop.com/en/pan-tilt-bracket-kit-single-attachment.html)          | $6.95  |
-  | [CMOS Camera for FPV w/ Pan / Tilt - 720x480 pixels](https://www.robotshop.com/en/cmos-camera-fpv-pan-tilt-720x480-pixels.html) | $44.90 |
+| Cameras & Mounts                                                                                                                | Price  |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| [Lynxmotion Pan and Tilt Kit / Aluminium](https://www.robotshop.com/en/lynxmotion-pan-and-tilt-kit-aluminium2.html)             | $29.93 |
+| [DF05BB Tilt / Pan Kit](https://www.robotshop.com/en/df05bb-tilt-pan-kit.html)                                                  | $29.05 |
+| [JSumo Robopan Micro Pan / Tilt](https://www.robotshop.com/en/jsumo-robopan-micro-pan-tilt.html)                                | $17.50 |
+| [Pan / Tilt bracket Kit (Single Attachment)](https://www.robotshop.com/en/pan-tilt-bracket-kit-single-attachment.html)          | $6.95  |
+| [CMOS Camera for FPV w/ Pan / Tilt - 720x480 pixels](https://www.robotshop.com/en/cmos-camera-fpv-pan-tilt-720x480-pixels.html) | $44.90 |
