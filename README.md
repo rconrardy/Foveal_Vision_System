@@ -1,6 +1,11 @@
 # Foveal Vision System
 > Combining computer vision & machine learning to create an artifical intelligence system that replicates human vision.
-## FINISHED
+## Libraries
+## cv2 (OpenCV)
+## math
+## threading
+
+## Finished:
 ### Eye
 * eye.py, Eye.__init__: initialize a new eye.
 * eye.py, Eye.capture: capture video stream.
@@ -25,7 +30,7 @@
 * vision.py, setup: setup a new vision with a ratio and pixel count.
 ### Camera
 
-## TODO
+## Todo:
 ### Eye
 ### Vision
 * vision.py, Vision.get\_face: get the faces in the current image.
@@ -33,13 +38,13 @@
 * Camera and mount selection.
 * Camera calibration.
 
-## IDEAS
+## Ideas
 ### Eye
 ### Vision
 ### Camera & Mount
 * Looking for a programmable pan and tilt camera mount that is cheap and reliable.
   * [Lynxmotion Pan and Tilt Kit / Aluminium](https://www.robotshop.com/en/lynxmotion-pan-and-tilt-kit-aluminium2.html)
   * [DF05BB Tilt / Pan Kit](https://www.robotshop.com/en/df05bb-tilt-pan-kit.html)
-  * [JSumo Robopan Micro Pan/Tilt](https://www.robotshop.com/en/jsumo-robopan-micro-pan-tilt.html)
+  * [JSumo Robopan Micro Pan / Tilt](https://www.robotshop.com/en/jsumo-robopan-micro-pan-tilt.html)
   * [Pan / Tilt bracket Kit (Single Attachment)](https://www.robotshop.com/en/pan-tilt-bracket-kit-single-attachment.html)
   * [CMOS Camera for FPV w/ Pan / Tilt - 720x480 pixels](https://www.robotshop.com/en/cmos-camera-fpv-pan-tilt-720x480-pixels.html)
