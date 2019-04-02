@@ -23,6 +23,7 @@
 * vision.py, Vision.get\_edge: get the edges in the current image.
 * vision.py, Vision.crop\_image: crop image to desired size.
 * vision.py, setup: setup a new vision with a ratio and pixel count.
+### Camera
 
 ## TODO
 ### Eye
@@ -31,3 +32,10 @@
 ### Camera
 * Camera and mount selection.
 * Camera calibration.
+
+## IDEAS
+### Eye
+### Vision
+### Camera
+* Looking for a programmable pan and tilt camera mount that is cheap and reliable.
+  * [Lynxmotion Pan and Tilt Kit / Aluminium](https://www.robotshop.com/en/lynxmotion-pan-and-tilt-kit-aluminium2.html)
