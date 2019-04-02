@@ -11,6 +11,7 @@ class Vision:
         self.images = {}
 
     def update_curr(self, image):
+        """Update the current image (frame)."""
         self.crop_image(image)
         self.images["curr"] = cv2.resize(
             self.images["curr"],
@@ -22,9 +23,11 @@ class Vision:
         )
 
     def update_prev(self):
+        """Update the previous image (frame)."""
         self.images["prev"] = self.images["gray"]
 
     def get_diff(self):
+        """Get the difference between the current and previous image."""
         self.images["diff"] = cv2.absdiff(
             self.images["prev"],
             self.images["gray"]
@@ -37,45 +40,25 @@ class Vision:
         )[1]
 
     def get_edge(self):
+        """Get the edges in the current image."""
         self.images["edge"] = cv2.Canny(
             self.images["curr"],
             100,
             200
         )
 
+    def get_face(self):
+        """Get the faces in the current image."""
+        pass
+
     def crop_image(self, image):
+        """Crop image to desired size."""
         size = image.shape[1]
         crop = math.floor(size * self.params["ratio"])
         move = (size - crop) // 2
         self.images["curr"] = image[move:(size - move), move:(size - move)]
 
-    # def captur(self, frame):
-    #     self.crop(frame, self.params["ratio"])
-    #
-    #     self.im = cv2.resize(self.im, (pixels, pixels))
-    #     self.gray = cv2.cvtColor(self.im, cv2.COLOR_BGR2GRAY)
-    #
-    # def crop(self, frame, ratio):
-    #     """Crop around center."""
-    #     size = frame.shape[1]
-    #     new_size = math.floor(size * ratio)
-    #     move = (size - new_size) // 2
-    #     self.im = frame[move:(size - move), move:(size - move)]
-    #
-    # def get_difference(self, prev_frame):
-    #     """Difference between frames"""
-    #     self.diff = cv2.absdiff(self.gray, prev_frame)
-    #     self.thresh = cv2.threshold(self.diff, 30, 255, cv2.THRESH_BINARY)[1]
-    #
-    # def get_edge(self):
-    #     """Edges in frame."""
-    #     self.edge = cv2.Canny(self.im, 100, 200)
-    #
-    # def get_faces(self, face_cascade):
-    #     """Faces in frame"""
-    #     pass
-
 
 def setup(ratio, pixels):
-    """Setup a new vision."""
+    """Setup a new vision with a ratio and pixel count."""
     return Vision(ratio, pixels)
