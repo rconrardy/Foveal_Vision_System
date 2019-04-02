@@ -25,6 +25,9 @@
 * vision.py, setup: setup a new vision with a ratio and pixel count.
 
 ## TODO
+### Eye
+### Vision
 * vision.py, Vision.get\_face: get the faces in the current image.
+### Camera
 * Camera and mount selection.
 * Camera calibration.
