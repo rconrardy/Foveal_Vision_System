@@ -29,13 +29,17 @@
 ### Eye
 ### Vision
 * vision.py, Vision.get\_face: get the faces in the current image.
-### Camera
+### Camera & Mount
 * Camera and mount selection.
 * Camera calibration.
 
 ## IDEAS
 ### Eye
 ### Vision
-### Camera
+### Camera & Mount
 * Looking for a programmable pan and tilt camera mount that is cheap and reliable.
   * [Lynxmotion Pan and Tilt Kit / Aluminium](https://www.robotshop.com/en/lynxmotion-pan-and-tilt-kit-aluminium2.html)
+  * [DF05BB Tilt / Pan Kit](https://www.robotshop.com/en/df05bb-tilt-pan-kit.html)
+  * [JSumo Robopan Micro Pan/Tilt](https://www.robotshop.com/en/jsumo-robopan-micro-pan-tilt.html)
+  * [Pan / Tilt bracket Kit (Single Attachment)](https://www.robotshop.com/en/pan-tilt-bracket-kit-single-attachment.html)
+  * [CMOS Camera for FPV w/ Pan / Tilt - 720x480 pixels](https://www.robotshop.com/en/cmos-camera-fpv-pan-tilt-720x480-pixels.html)
