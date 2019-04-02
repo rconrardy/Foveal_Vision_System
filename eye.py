@@ -51,12 +51,13 @@ class Eye:
 
 
     def setup_vision(self):
+        """Setup vision types that will be used."""
         self.vision["mainfoveal"] = vision.setup(1/3, 64)
         self.vision["parafoveal"] = vision.setup(2/3, 64)
         self.vision["peripheral"] = vision.setup(3/3, 64)
 
     def update_curr(self):
-        """Check if stream was read."""
+        """Update the current image (frame)."""
         self.status["caught"], self.images["curr"] = self.stream.read()
         self.crop_image()
         if not self.status["caught"]:
@@ -66,13 +67,14 @@ class Eye:
         self.vision["peripheral"].update_curr(self.images["curr"])
 
     def update_prev(self):
-        """Update """
+        """Update the previous image (frame)."""
         self.images["prev"] = self.images["curr"]
         self.vision["mainfoveal"].update_prev()
         self.vision["parafoveal"].update_prev()
         self.vision["peripheral"].update_prev()
 
     def check_stop(self):
+        """Check to see if a stop signal was sent."""
         if cv2.waitKey(1) & 0xFF == ord('q'):
             self.stop()
 
@@ -88,7 +90,7 @@ class Eye:
         self.status["shutdown"] = True
 
     def crop_image(self):
-        """Crop image to quare."""
+        """Crop image to a square."""
         width, height = self.images["curr"].shape[:2]
         if width > height:
             move = (width - height) // 2
